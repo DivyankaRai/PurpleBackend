@@ -15,8 +15,8 @@ const PORT = 5000;
 /* MONGODB CONNECT */
 mongoose.set("strictQuery", false);
 
-const mongoUrl = 'mongodb://divii:1221@ac-vcz3qhc-shard-00-00.1kukhan.mongodb.net:27017,ac-vcz3qhc-shard-00-01.1kukhan.mongodb.net:27017,ac-vcz3qhc-shard-00-02.1kukhan.mongodb.net:27017/?ssl=true&replicaSet=atlas-2dks9z-shard-0&authSource=admin&retryWrites=true&w=majority';
-mongoose.connect(mongoUrl, { useUnifiedTopology: true }).then(() => {
+// const mongoUrl = dotenv.config();
+mongoose.connect(process.env.mongo_Url, { useUnifiedTopology: true }).then(() => {
     console.log('success');
 }).catch(e => {
     console.error(e);
@@ -50,6 +50,6 @@ app.use("/orders", orderRoute);
 // app.use("/navbars", navbarRoutes);
 
 /* LISTENING */
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
